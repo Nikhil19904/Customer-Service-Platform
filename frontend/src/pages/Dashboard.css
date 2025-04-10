@@ -1,0 +1,85 @@
+/* Dashboard Styling */
+.service-request-card {
+  transition: all 0.3s ease;
+  border: none;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.service-request-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+}
+
+.service-request-card .card-header {
+  background-color: #f8f9fa;
+  border-bottom: none;
+  padding: 0.75rem 1rem;
+}
+
+.service-request-card .badge {
+  font-weight: 500;
+  padding: 0.5rem 0.75rem;
+}
+
+.service-request-card .card-footer {
+  background-color: transparent;
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
+  padding: 0.75rem 1rem;
+}
+
+.notification-alert {
+  position: fixed;
+  top: 80px;
+  right: 20px;
+  z-index: 1000;
+  min-width: 300px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  border-left: 4px solid var(--primary-color);
+  animation: slide-in 0.3s ease, fade-out 0.3s ease 2.7s;
+}
+
+/* Animation for the notifications */
+@keyframes slide-in {
+  0% {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fade-out {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+/* Styling for the filter buttons */
+.btn-outline-primary {
+  border-color: rgba(63, 81, 181, 0.2);
+  color: var(--primary-color);
+}
+
+.btn-outline-primary:hover {
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+}
+
+/* Button group spacing */
+.btn-group .btn {
+  margin-left: 5px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .notification-alert {
+    width: calc(100% - 40px);
+    right: 20px;
+    min-width: auto;
+  }
+} 
