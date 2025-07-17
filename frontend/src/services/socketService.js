@@ -1,10 +1,13 @@
 import { io } from 'socket.io-client';
 
+// Use environment variable or default to localhost
+const SOCKET_URL = process.env.REACT_APP_SOCKET_URL || 'http://localhost:5000';
+
 let socket;
 
 // Connect to the Socket.IO server
 export const initSocket = (token) => {
-  socket = io('http://localhost:5000', {
+  socket = io(SOCKET_URL, {
     auth: {
       token
     }

@@ -2,6 +2,9 @@ import React, { createContext, useState, useEffect } from 'react';
 import axios from 'axios';
 import { initSocket, disconnectSocket } from '../services/socketService';
 
+// Use environment variable or default to localhost
+const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
+
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
@@ -28,7 +31,7 @@ export const AuthProvider = ({ children }) => {
           }
         };
 
-        const response = await axios.get('http://localhost:5000/api/auth/me', config);
+        const response = await axios.get(`${API_URL}/auth/me`, config);
 
         setUser(response.data);
         setIsAuthenticated(true);
@@ -72,7 +75,7 @@ export const AuthProvider = ({ children }) => {
           }
         };
 
-        const response = await axios.get('http://localhost:5000/api/auth/me', config);
+        const response = await axios.get(`${API_URL}/auth/me`, config);
         setUser(response.data);
       } catch (error) {
         console.error('Error loading user:', error);
@@ -99,7 +102,7 @@ export const AuthProvider = ({ children }) => {
         }
       };
 
-      const response = await axios.get('http://localhost:5000/api/auth/me', config);
+      const response = await axios.get(`${API_URL}/auth/me`, config);
 
       setUser(response.data);
       setIsAuthenticated(true);
@@ -130,7 +133,7 @@ export const AuthProvider = ({ children }) => {
       };
 
       const response = await axios.put(
-        'http://localhost:5000/api/users/profile', 
+        `${API_URL}/users/profile`, 
         userData,
         config
       );
@@ -155,7 +158,7 @@ export const AuthProvider = ({ children }) => {
           }
         };
         
-        await axios.get('http://localhost:5000/api/auth/logout', config);
+        await axios.get(`${API_URL}/auth/logout`, config);
       }
       
       // Disconnect socket

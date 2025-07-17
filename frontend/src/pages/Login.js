@@ -3,6 +3,8 @@ import { Navigate } from 'react-router-dom';
 import AuthContext from '../context/AuthContext';
 import './Login.css';
 
+const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
+
 const Login = () => {
   const { isAuthenticated } = useContext(AuthContext);
   const loginCardRef = useRef(null);
@@ -32,7 +34,7 @@ const Login = () => {
   }
 
   const handleGoogleLogin = () => {
-    window.location.href = 'http://localhost:5000/api/auth/google';
+    window.location.href = `${API_URL}/auth/google`;
   };
 
   return (

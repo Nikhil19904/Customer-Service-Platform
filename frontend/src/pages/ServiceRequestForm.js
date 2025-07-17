@@ -2,6 +2,9 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
+// Use an environment variable or a config value
+const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
+
 const ServiceRequestForm = () => {
   const [formData, setFormData] = useState({
     category: '',
@@ -39,7 +42,7 @@ const ServiceRequestForm = () => {
       };
 
       await axios.post(
-        'http://localhost:5000/api/service-requests',
+        `${API_URL}/service-requests`,
         formData,
         config
       );

@@ -7,6 +7,9 @@ import {
 } from '../services/socketService';
 import './ServiceRequestDetail.css';
 
+// Use environment variable or default
+const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
+
 const ServiceRequestDetail = () => {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -38,7 +41,7 @@ const ServiceRequestDetail = () => {
         };
 
         const response = await axios.get(
-          `http://localhost:5000/api/service-requests/${id}`,
+          `${API_URL}/service-requests/${id}`,
           config
         );
         
@@ -77,7 +80,7 @@ const ServiceRequestDetail = () => {
       };
 
       const response = await axios.put(
-        `http://localhost:5000/api/service-requests/${id}`,
+        `${API_URL}/service-requests/${id}`,
         { content },
         config
       );
@@ -108,7 +111,7 @@ const ServiceRequestDetail = () => {
         }
       };
       
-      await axios.delete(`http://localhost:5000/api/service-requests/${id}`, config);
+      await axios.delete(`${API_URL}/service-requests/${id}`, config);
       
       navigate('/dashboard');
       // We'll rely on the socket event to update the dashboard

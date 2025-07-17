@@ -8,6 +8,9 @@ import {
 } from '../services/socketService';
 import './Dashboard.css';
 
+// Use an environment variable or a config value 
+const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
+
 const Dashboard = () => {
   const [serviceRequests, setServiceRequests] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState('All');
@@ -36,9 +39,9 @@ const Dashboard = () => {
         }
       };
 
-      let url = 'http://localhost:5000/api/service-requests';
+      let url = `${API_URL}/service-requests`;
       if (selectedCategory !== 'All') {
-        url = `http://localhost:5000/api/service-requests/category/${selectedCategory}`;
+        url = `${API_URL}/service-requests/category/${selectedCategory}`;
       }
 
       const response = await axios.get(url, config);
@@ -116,7 +119,7 @@ const Dashboard = () => {
         }
       };
       
-      await axios.delete(`http://localhost:5000/api/service-requests/${id}`, config);
+      await axios.delete(`${API_URL}/service-requests/${id}`, config);
       
       // Remove the deleted request from state
       // Note: The socket update might also handle this, but we'll update locally for immediate feedback
