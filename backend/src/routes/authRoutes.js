@@ -62,4 +62,32 @@ router.get('/test', (req, res) => {
 router.get('/me', protect, getCurrentUser);
 router.get('/logout', protect, logout);
 
+// Add a database connection status check route
+router.get('/db-status', (req, res) => {
+  const mongoose = require('mongoose');
+  const isDevelopmentMode = process.env.GOOGLE_CLIENT_ID === 'dummy_client_id';
+  
+  if (isDevelopmentMode) {
+    return res.json({
+      status: 'development',
+      message: 'Running in development mode with mock data',
+      connected: true
+    });
+  }
+  
+  const state = mongoose.connection.readyState;
+  const states = {
+    0: 'disconnected',
+    1: 'connected',
+    2: 'connecting',
+    3: 'disconnecting'
+  };
+  
+  res.json({
+    status: states[state] || 'unknown',
+    message: state === 1 ? 'Database connection is healthy' : 'Database is not connected',
+    connected: state === 1
+  });
+});
+
 module.exports = router; 

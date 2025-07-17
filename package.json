@@ -1,0 +1,28 @@
+{
+  "name": "customer-service-platform",
+  "version": "1.0.0",
+  "description": "Full-stack customer service platform with real-time updates",
+  "scripts": {
+    "start:backend": "cd backend && npm start",
+    "start:frontend": "cd frontend && npm start",
+    "dev:backend": "cd backend && npm run dev",
+    "dev:frontend": "cd frontend && npm start",
+    "dev": "concurrently \"npm run dev:backend\" \"npm run dev:frontend\"",
+    "install:all": "npm install && cd backend && npm install && cd ../frontend && npm install"
+  },
+  "keywords": [
+    "customer-service",
+    "socket.io",
+    "intercom",
+    "mern-stack"
+  ],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "concurrently": "^8.2.0"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.7",
+    "intercom-client": "^6.0.0-beta.3"
+  }
+}

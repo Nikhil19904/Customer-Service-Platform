@@ -6,7 +6,8 @@ const {
   getUserServiceRequests,
   getServiceRequestsByCategory,
   getServiceRequest,
-  updateServiceRequest
+  updateServiceRequest,
+  deleteServiceRequest
 } = require('../controllers/serviceRequestController');
 
 
@@ -15,5 +16,6 @@ router.get('/', protect, getUserServiceRequests);
 router.get('/category/:category', protect, getServiceRequestsByCategory);
 router.get('/:id', protect, getServiceRequest);
 router.put('/:id', protect, updateServiceRequest);
+router.delete('/:id', protect, deleteServiceRequest);
 
 module.exports = router; 

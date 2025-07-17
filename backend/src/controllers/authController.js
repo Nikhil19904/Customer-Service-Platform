@@ -1,6 +1,8 @@
 const jwt = require('jsonwebtoken');
 const User = require('../models/User');
 
+// Get frontend URL from environment or use default
+const FRONTEND_URL = process.env.FRONTEND_URL || 'http://localhost:3002';
 
 const generateToken = (id) => {
   return jwt.sign({ id }, process.env.JWT_SECRET, {
@@ -33,10 +35,10 @@ const googleAuthCallback = async (req, res) => {
     const token = generateToken(req.user._id);
     
     // Redirect to frontend with token
-    res.redirect(`http://localhost:3000/login/success?token=${token}`);
+    res.redirect(`${FRONTEND_URL}/login/success?token=${token}`);
   } catch (error) {
     console.error('Auth callback error:', error);
-    res.redirect('http://localhost:3000/login?error=authentication_failed');
+    res.redirect(`${FRONTEND_URL}/login?error=authentication_failed`);
   }
 };
 

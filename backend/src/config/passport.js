@@ -5,6 +5,8 @@ const User = require('../models/User');
 // Debug environment variables
 console.log('PASSPORT CONFIG:');
 console.log('- GOOGLE_CLIENT_ID:', process.env.GOOGLE_CLIENT_ID ? `${process.env.GOOGLE_CLIENT_ID.substr(0, 10)}...` : 'Undefined');
+console.log('- GOOGLE_CLIENT_SECRET:', process.env.GOOGLE_CLIENT_SECRET ? 'Set (hidden)' : 'Undefined');
+console.log('- GOOGLE_CALLBACK_URL:', process.env.GOOGLE_CALLBACK_URL || 'Undefined');
 console.log('- CLIENT_ID length:', process.env.GOOGLE_CLIENT_ID ? process.env.GOOGLE_CLIENT_ID.length : 0);
 
 // Serialize user to session
@@ -38,6 +40,8 @@ const hasValidCredentials =
 
 if (hasValidCredentials) {
   console.log('Using Google OAuth with clientID:', clientID.substr(0, 10) + '...');
+  console.log('Using Google callback URL:', callbackURL);
+  
   try {
     // Create the Google strategy
     const googleStrategy = new GoogleStrategy(
@@ -84,11 +88,18 @@ if (hasValidCredentials) {
     console.log('Google strategy configured successfully');
   } catch (error) {
     console.error('Error configuring Google strategy:', error);
+    console.error('Error details:', error.message);
     console.log('Falling back to mock authentication');
     useMockStrategy();
   }
 } else {
   console.log('Using development mode with mock authentication');
+  console.log('Missing credentials:', {
+    hasClientId: !!clientID,
+    hasClientSecret: !!clientSecret,
+    validClientIdLength: clientID ? clientID.length > 10 : false,
+    validClientSecretLength: clientSecret ? clientSecret.length > 5 : false
+  });
   useMockStrategy();
 }
 
